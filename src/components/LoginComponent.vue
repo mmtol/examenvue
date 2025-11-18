@@ -21,7 +21,7 @@
         </form>
         <br/>
         <br/>
-        <h3>{{ mensaje }}</h3>
+        <h3 v-if="mensaje">{{ mensaje }}</h3>
     </div>
 </template>
 
