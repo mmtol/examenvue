@@ -41,6 +41,7 @@
                 service.iniciarSesion(usuario).then(result =>
                 {
                     localStorage.setItem('token', result.response);
+                    this.$router.push("/perfil");
                 })
             }
         }
