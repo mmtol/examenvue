@@ -1,13 +1,70 @@
 <template>
     <div>
         <h1>COMPRAR</h1>
+        <h2>Elige un cubo para comprar</h2>
+        <form v-on:submit.prevent="comprar">
+            <select @change="mostrarCubo" v-model="idCubo">
+                <option v-for="cubo in cubos" :key="cubo">
+                    {{ cubo.idCubo }}
+                </option>   
+            </select>
+            <button class="btn btn-info">Comprar</button>
+        </form>
+        <div v-if="cubo">
+            <img :src="cubo.imagen"/>
+        </div>
     </div>
 </template>
 
 <script>
+    import ServiceCubos from './../services/serviceCubos';
+    const service = new ServiceCubos();
+
     export default 
     {
-        
+        data()
+        {
+            return{
+                token:localStorage.getItem('token'),
+                cubos:[],
+                cubo:{},
+                idCubo:0
+            }
+        },
+        mounted()
+        {
+            if (!this.token)
+            {
+                this.$router.push("/login");
+            }
+            else
+            {
+                service.getCubos().then(result =>
+            {
+                this.cubos = result;
+            })
+            }
+        },
+        methods:
+        {
+            mostrarCubo()
+            {
+                service.findCubo(this.idCubo).then(result =>
+                {
+                    this.cubo = result;
+                })
+            },
+            comprar()
+            {
+                console.log(this.token)
+                console.log(this.idCubo)
+                service.comprar(this.token, this.idCubo).then(result =>
+                {
+                    console.log(result);
+                    this.$router.push("/compras");
+                })
+            }
+        }
     }
 </script>
 

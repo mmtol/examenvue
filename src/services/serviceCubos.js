@@ -92,9 +92,23 @@ export default class ServiceCubos
         return new Promise(function(resolve)
         {
             var url = Global.api;
-            var endPoint = "api/Compra/InsertarPedido"+idCubo;
+            var endPoint = "api/Compra/InsertarPedido/"+idCubo;
 
             axios.post(url+endPoint, {headers: {'Authorization': `Bearer ${token}`}}).then(response =>
+            {
+                resolve(response.data);
+            })
+        })
+    }
+
+    findCubo(idCubo)
+    {
+        return new Promise(function(resolve)
+        {
+            var url = Global.api;
+            var endPoint = "api/Cubos/"+idCubo;
+
+            axios.get(url+endPoint).then(response =>
             {
                 resolve(response.data);
             })

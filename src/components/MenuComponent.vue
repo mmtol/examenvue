@@ -27,8 +27,8 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Marcas
                         </a>
-                        <ul class="dropdown-menu" v-for="marca in marcas" :key="marca">
-                            <li>
+                        <ul class="dropdown-menu">
+                            <li v-for="marca in marcas" :key="marca">
                                 <router-link class="dropdown-item" :to="'/cubosmarca/'+marca">{{marca}}</router-link>
                             </li>
                         </ul>
