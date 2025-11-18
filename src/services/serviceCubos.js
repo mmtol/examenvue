@@ -87,14 +87,14 @@ export default class ServiceCubos
         })
     }
 
-    comprar(token, idCubo)
+    comprar(token, idCubo, compra)
     {
         return new Promise(function(resolve)
         {
             var url = Global.api;
             var endPoint = "api/Compra/InsertarPedido/"+idCubo;
 
-            axios.post(url+endPoint, {headers: {'Authorization': `Bearer ${token}`}}).then(response =>
+            axios.post(url+endPoint, compra, {headers: {'Authorization': `Bearer ${token}`}}).then(response =>
             {
                 resolve(response.data);
             })

@@ -56,13 +56,26 @@
             },
             comprar()
             {
-                console.log(this.token)
-                console.log(this.idCubo)
-                service.comprar(this.token, this.idCubo).then(result =>
+                let idUsuario;
+                service.getPerfil(this.token).then(result =>
                 {
-                    console.log(result);
-                    this.$router.push("/compras");
+                    idUsuario = result.idUsuario;
+
+                    let compra =
+                    {
+                        idCubo:this.idCubo,
+                        idPedido:0,
+                        idUsuario:idUsuario,
+                        fechaPedido:"hoy"
+                    };
+                    console.log(compra);
+                    service.comprar(this.token, this.idCubo, compra).then(result =>
+                    {
+                        console.log(result);
+                        this.$router.push("/comprasusuario");
+                    })
                 })
+
             }
         }
     }
