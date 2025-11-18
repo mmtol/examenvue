@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>LOGIN</h1>
+        <h2>Rellene los datos para iniciar sesión</h2>
         <form v-on:submit.prevent="iniciarSesion">
             <label>Email</label>
             <br/>
@@ -10,8 +11,17 @@
             <br/>
             <input type="text" v-model="passwd"/>
             <br/><br/>
-            <button>Iniciar sesión</button>
+            <button class="btn btn-info">Iniciar sesión</button>
         </form>
+        <br/>
+        <br/>
+        <h2>Pulse el botón para cerrar sesión</h2>
+        <form v-on:submit.prevent="cerrarSesion">
+            <button class="btn btn-danger">Cerrar sesión</button>
+        </form>
+        <br/>
+        <br/>
+        <h3>{{ mensaje }}</h3>
     </div>
 </template>
 
@@ -25,7 +35,8 @@
         {
             return {
                 email:"",
-                passwd:""
+                passwd:"",
+                mensaje:""
             }
         },
         methods:
@@ -43,6 +54,19 @@
                     localStorage.setItem('token', result.response);
                     this.$router.push("/perfil");
                 })
+            },
+            cerrarSesion()
+            {
+                if (localStorage.getItem('token'))
+                {
+                    localStorage.removeItem('token');
+                    this.mensaje="Sesión cerrada, para acceder a todas las pestañas, vuelva a iniciarla"
+                }
+                else
+                {
+                    this.mensaje="Sesión ya cerrada"
+                }
+
             }
         }
     }
