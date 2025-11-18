@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <h1>COMPRAR</h1>
     </div>
 </template>
 
@@ -12,5 +12,5 @@
 </script>
 
 <style>
-
+    @import './../assets/css/estilos.css'
 </style>
