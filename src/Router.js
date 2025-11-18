@@ -18,7 +18,7 @@ const rutas =
         component:CubosMarcaComponent
     },
     {
-        path:"/comprar/:idcubo",
+        path:"/comprar",
         component:ComprarComponent
     },
     {

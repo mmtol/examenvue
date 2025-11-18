@@ -27,8 +27,10 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Marcas
                         </a>
-                        <ul class="dropdown-menu">
-                            <li></li>
+                        <ul class="dropdown-menu" v-for="marca of marcas" :key="marca">
+                            <li>
+                                <router-link class="dropdown-item" :to="'/cubosmarca/'+marca">{{marca}}</router-link>
+                            </li>
                         </ul>
                         </li>
                     </ul>
@@ -39,9 +41,24 @@
 </template>
 
 <script>
+    import ServiceCubos from './../services/serviceCubos';
+    const service = new ServiceCubos();
+
     export default 
     {
-        
+        data()
+        {
+            return{
+                marcas:[]
+            }
+        },
+        mounted()
+        {
+            service.getMarcas().then(result =>
+            {
+                this.marcas = result;
+            })
+        }
     }
 </script>
 

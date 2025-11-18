@@ -17,6 +17,20 @@ export default class ServiceCubos
         })
     }
 
+    getMarcas()
+    {
+        return new Promise(function(resolve)
+        {
+            var url = Global.api;
+            var endPoint = "api/Cubos/Marcas";
+
+            axios.get(url+endPoint).then(response =>
+            {
+                resolve(response.data);
+            })
+        })
+    }
+
     getCubosMarca(marca)
     {
         return new Promise(function(resolve)
